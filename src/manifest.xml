@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package type="module">
+
+    <!-- UID of package. -->
+    <uid>mod.verone.chat</uid>
+    <!-- Package name. -->
+    <name>Chat</name>
+    <!-- Package version. -->
+    <version>0.1.0</version>
+    <!-- Package release date. -->
+    <relase-date>2015.11.10</relase-date>
+    <!-- Package license. -->
+    <license>GPLv3</license>
+    <!-- Author details. -->
+    <author>
+        <name>Adam Banaszkiewicz</name>
+        <url>http://www.veronecrm.com</url>
+    </author>
+
+    <!-- Settings list. -->
+    <setting type="0" name="mod.chat.ws">ws://ws.chat.veronecrm.com:8000</setting>
+    <setting type="2" name="mod.chat.connection.autologin">1</setting>
+    <setting type="2" name="mod.chat.notification.browsershow">1</setting>
+    <setting type="2" name="mod.chat.sound.volume">0.50</setting>
+
+</package>
