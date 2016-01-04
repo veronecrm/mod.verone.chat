@@ -8,16 +8,11 @@
     </script>
 @endif
 <div class="chat-sidebar <?php echo $opened; ?>">
-    <div class="status dropdown">
-        <a class="name dropdown-toggle" href="#" data-toggle="dropdown">
+    <div class="status">
+        <div class="name">
             <span class="dot"></span>
             {{ $app->user()->getName() }}
-        </a>
-        <ul class="dropdown-menu with-headline">
-            <li class="headline">{{ t('modChatChangeStatus') }}</li>
-            <li class="on"><a href="#"><i class="fa fa-user"></i> {{ t('modChatStatusConnected') }}</a></li>
-            <li class="off"><a href="#"><i class="fa fa-user-times"></i> {{ t('modChatStatusDisconnected') }}</a></li>
-        </ul>
+        </div>
     </div>
     <div class="users">
         <div class="cooworkers">
@@ -26,7 +21,7 @@
                 <?php foreach($app->repo('User', 'User')->findAll() as $i => $user): ?>
                     <?php if($app->user()->getId() != $user->getId()): ?>
                         <?php $name = trim($user->getName()) ? $user->getName() : $user->getUsername(); ?>
-                        <li data-id="<?php echo $user->getId(); ?>" data-name="<?php echo $name; ?>"><span class="conn-dot"></span><?php echo $name; ?></li>
+                        <li data-id="<?php echo $user->getId(); ?>" data-name="<?php echo $name; ?>"><div class="user-avatar" style="background-image:url('{{ $user->getAvatarUrl() }}');" data-avatar="{{ asset($user->getAvatarUrl()) }}"></div><span class="user-name"><?php echo $name; ?></span><span class="conn-dot"></span></li>
                     <?php endif; ?>
                 <?php endforeach; ?>
             </ul>
@@ -36,6 +31,21 @@
             <ul></ul>
         </div>
     </div>
+    <div class="chat-status-container">
+        <div class="chat-status">
+            <h4>{{ t('modChatChangeStatus') }}</h4>
+            <ul>
+                <li class="on"><a href="#" data-status="connected"><i class="fa fa-circle"></i> {{ t('modChatStatusConnected') }}</a></li>
+                <li class="off"><a href="#" data-status="disconnected"><i class="fa fa-circle"></i> {{ t('modChatStatusDisconnected') }}</a></li>
+            </ul>
+        </div>
+    </div>
+    @if ! $isRegistered
+        <div class="chat-information-box">
+            <button type="button" class="close" title="{{ t('close') }}">&times;</button>
+            {{ t('modChatAppLooksLikeNotRegisteredInformation') }}
+        </div>
+    @endif
     <div class="settings">
         <a href="#" data-toggle="modal" data-target="#chat-settings-modal"><span>{{ t('modChatSettings') }}</span> <i class="fa fa-cog"></i></a>
     </div>
@@ -112,6 +122,10 @@
                     }
                 }, 50);
             }
+        });
+
+        $('.chat-information-box .close').click(function() {
+            $('.chat-information-box').remove();
         });
     });
 </script>

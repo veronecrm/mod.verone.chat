@@ -2,7 +2,7 @@
 /**
  * Verone CRM | http://www.veronecrm.com
  *
- * @copyright  Copyright (C) 2015 Adam Banaszkiewicz
+ * @copyright  Copyright (C) 2015 - 2016 Adam Banaszkiewicz
  * @license    GNU General Public License version 3; see license.txt
  */
 
@@ -14,7 +14,7 @@ class BaseView extends Plugin
 {
     public function navbarLinks()
     {
-        // We need load assets here, becouse in bodyEnd event is too late.
+        // We need load assets here, because in bodyEnd event is too late.
         $this->assetter()
             ->load('howler')
             ->load([
@@ -30,6 +30,8 @@ class BaseView extends Plugin
 
     public function bodyEnd()
     {
-        return $this->get('templating.engine')->render('chatSidebar.Plugin.Chat');
+        return $this->get('templating.engine')->render('chatSidebar.Plugin.Chat', [
+            'isRegistered' => $this->get('registration')->isRegistered()
+        ]);
     }
 }

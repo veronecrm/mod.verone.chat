@@ -6,9 +6,9 @@
     <!-- Package name. -->
     <name>Chat</name>
     <!-- Package version. -->
-    <version>0.1.0</version>
+    <version>0.3.0</version>
     <!-- Package release date. -->
-    <relase-date>2015.11.10</relase-date>
+    <relase-date>2016.01.04</relase-date>
     <!-- Package license. -->
     <license>GPLv3</license>
     <!-- Author details. -->

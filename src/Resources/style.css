@@ -1,36 +1,52 @@
-.chat-sidebar {position:fixed;z-index:10;top:50px;right:-250px;bottom:0;width:250px;background-color:#fff;-moz-transition:all 0.15s ease;-webkit-transition:all 0.15s ease;transition:all 0.15s ease;}
+.chat-sidebar {position:fixed;z-index:10;top:50px;right:-250px;bottom:-1px;width:250px;;background-color:#fff;-moz-transition:all 0.15s ease;-webkit-transition:all 0.15s ease;transition:all 0.15s ease;box-shadow:-1px 0 5px rgba(0,0,0,.07);}
 .chat-sidebar.opened {right:0px;}
-.chat-sidebar .status {position:absolute;height:32px;width:100%;left:0;top:0;border-bottom:1px solid #ccc;font-size:14px;z-index:100;background-color:#0088CC;color:#fff;}
+.chat-sidebar .status {position:absolute;height:32px;width:100%;left:0;top:0;border-bottom:1px solid #e7e7e7;font-size:14px;z-index:100;background-color:#0088CC;color:#fff;}
 .chat-sidebar .status .name {display:block;height:32px;line-height:32px;color:#fff;padding:0 0 0 30px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.chat-sidebar .status .name .dot {position:absolute;left:10px;top:10px;width:12px;height:12px;background-color:#ddd;border:1px solid #fff;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;}
+.chat-sidebar .status .name .dot {position:absolute;left:10px;top:10px;width:12px;height:12px;background-color:#e7e7e7;border:1px solid #fff;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;}
 .chat-sidebar .status .name .dot.c {background-color:#29B12B}
-.chat-sidebar .users {position:absolute;height:100%;width:100%;padding-top:32px;border-bottom:1px solid #ccc;border-left:1px solid #ccc;}
+.chat-sidebar .status:hover {cursor:pointer;}
+.chat-sidebar .users {position:absolute;height:100%;width:100%;padding-top:32px;border-bottom:1px solid #e7e7e7;border-left:1px solid #e7e7e7;overflow:auto;}
 .chat-sidebar .users h5 {font-size:12px;text-transform:uppercase;font-weight:normal;text-align:center;color:#aaa;margin:8px 0;padding:0;}
 .chat-sidebar .users > div {margin-bottom:40px;}
 .chat-sidebar .users ul,
 .chat-sidebar .users ul li {list-style:none;list-style-image:none;display:block;padding:0;margin:0;position:relative;min-height:25px;}
-.chat-sidebar .users ul {border-top:1px solid #ddd;}
-.chat-sidebar .users ul li {padding:3px 6px 4px 18px;font-size:12px;border-bottom:1px solid #ddd;white-space:nowrap;}
+.chat-sidebar .users ul {border-top:1px solid #e7e7e7;}
+.chat-sidebar .users ul li {padding:12px 28px 12px 45px;font-size:12px;white-space:nowrap;}
 .chat-sidebar .users ul li:hover {cursor:pointer;background-color:#f1f1f1}
-.chat-sidebar .users ul li .conn-dot {position:absolute;left:6px;top:9px;width:7px;height:7px;background-color:#ddd;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;}
+.chat-sidebar .users ul li .conn-dot {position:absolute;right:17px;top:50%;margin-top:-4px;width:8px;height:8px;background-color:#ddd;-webkit-border-radius:50%;-moz-border-radius:50%;border-radius:50%;}
 .chat-sidebar .users ul li .btn-widget-remove {display:inline-block;color:#888;margin:0 5px 0 0;}
 .chat-sidebar .users ul li .btn-widget-remove:hover {color:#D9534F;}
 .chat-sidebar .users ul li .label {display:block;position:absolute;right:6px;top:5px;font-size:10px;background-color:#0088CC;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px}
+.chat-sidebar .users ul li .user-avatar {width:34px;height:34px;padding:0;position:absolute;left:4px;top:50%;margin-top:-16px;border:1px solid #e7e7e7;}
+.chat-sidebar .users ul li .user-name {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;width:100%;}
 .chat-sidebar .users ul li.active {background-color:#f1f1f1}
 .chat-sidebar .users ul li.connected .conn-dot {background-color:#29B12B}
-.chat-sidebar .users ul li.is-widget small {opacity:.8;font-size:12px;color:#0088CC;}
+.chat-sidebar .users ul li.is-widget:after {width:34px;height:34px;padding:0;position:absolute;left:4px;top:50%;margin-top:-16px;border:1px solid #e7e7e7;content:"WIDGET";text-align:center;line-height:34px;font-size:8px;color:#0088CC;font-weight:bold;}
 .chat-sidebar .settings {display:block;position:absolute;bottom:0;right:0;}
 .chat-sidebar .settings > a {color:gray;display:block;position:relative;line-height:32px;text-align:center;height:32px;padding:0 10px;}
 .chat-sidebar .settings > a span {opacity:0;font-size:13px;vertical-align:middle;display:inline-block;padding-right:6px;}
 .chat-sidebar .settings > a i {font-size:20px;vertical-align:middle;}
 .chat-sidebar .settings:hover > a span {opacity:1}
+.chat-sidebar .chat-status-container {display:none;position:absolute;left:0;top:0;right:0;bottom:0;z-index:100;background-color:rgba(255,255,255,.45);}
+.chat-sidebar .chat-status {position:relative;overflow:auto;background-color:#fff;margin:20px;padding:3px;box-shadow:0 0 3px rgba(0,0,0,.2)}
+.chat-sidebar .chat-status h4 {text-align:center;font-size:15px;font-weight:normal;margin:12px 0 14px 0;text-transform:uppercase;}
+.chat-sidebar .chat-status ul,
+.chat-sidebar .chat-status ul li {list-style:none;list-style-image:none;padding:0;margin:0;}
+.chat-sidebar .chat-status ul li a {display:block;padding:4px 7px 5px;color:#333;font-size:13px;}
+.chat-sidebar .chat-status ul li a:hover {background-color:#f6f6f6}
+.chat-sidebar .chat-status .fa {display:inline-block;width:15px;text-align:left;}
+.chat-sidebar .chat-status .on .fa {color:#29B12B;}
+.chat-sidebar .chat-status .off .fa {color:#ddd;}
+.chat-sidebar.chat-status-opened .chat-status-container {display:block;}
+.chat-sidebar.chat-status-opened .status {-webkit-filter:blur(1px);-moz-filter:blur(1px);-o-filter:blur(1px);-ms-filter:blur(1px);filter:blur(1px);}
+.chat-sidebar.chat-status-opened .users {-webkit-filter:blur(1px);-moz-filter:blur(1px);-o-filter:blur(1px);-ms-filter:blur(1px);filter:blur(1px);}
 
 .chat-boxes {height:1px;position:fixed;z-index:800;right:0;bottom:0;-moz-transition:all 0.15s ease;-webkit-transition:all 0.15s ease;transition:all 0.15s ease;}
 .chat-boxes .box {width:230px;height:270px;float:left;margin:0 10px 0 0;position:relative;top:-270px;border-top-left-radius:2px;border-top-right-radius:2px;box-shadow:0px 0px 5px 1px rgba(0, 0, 0, 0.047);}
 .chat-boxes .box .headline {height:25px;background-color:#0088CC;color:#fff;border-top-left-radius:2px;border-top-right-radius:2px;}
 .chat-boxes .box .headline:hover {cursor:pointer;}
 .chat-boxes .box .headline .username {display:block;line-height:25px;padding:0 7px 0 20px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.chat-boxes .box .headline .username .status {background-color:#DDDDDD;border-radius:10px;height:7px;left:8px;position:absolute;top:9px;width:7px;}
+.chat-boxes .box .headline .username .status {background-color:#ddd;border-radius:10px;height:7px;left:8px;position:absolute;top:9px;width:7px;}
 .chat-boxes .box .headline .username .status.c {background-color:#29B12B;}
 .chat-boxes .box .headline .btns {float:right;position:relative;}
 .chat-boxes .box .headline .btns i {display:block;float:left;height:25px;width:25px;line-height:25px;text-align:center;margin-left:-4px;}
@@ -72,3 +88,5 @@
 .bubble.notice {background-color:#f1f1f1;color:#000;}
 .bubble.notice.left:before {border-right-color:#f1f1f1;}
 .bubble.notice.right:before {border-left-color:#f1f1f1;}
+
+.chat-information-box {position:absolute;left:1px;bottom:32px;right:0;max-height:100px;padding:12px 14px;background-color:#fff;border-top:1px solid #e7e7e7;border-bottom:1px solid #e7e7e7;color:rgba(0,0,0,.7);}

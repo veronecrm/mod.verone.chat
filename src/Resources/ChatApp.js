@@ -1,7 +1,7 @@
 /**
  * Verone CRM | http://www.veronecrm.com
  *
- * @copyright  Copyright (C) 2015 Adam Banaszkiewicz
+ * @copyright  Copyright (C) 2015 - 2016 Adam Banaszkiewicz
  * @license    GNU General Public License version 3; see license.txt
  */
 
@@ -32,11 +32,6 @@ var ChatApp = function(api) {
         }
 
         this.boxes.init();
-
-        if(self.showBrowserNotifications)
-        {
-            ChatBrowserNotification.init();
-        }
 
         ChatSoundNotification.init(this.soundVolume);
 
@@ -187,8 +182,8 @@ var ChatApp = function(api) {
             $('.chat-boxes').addClass('panel-opened');
         }
 
-        $('.chat-sidebar .status ul li a').click(function(e) {
-            if($(this).parent().hasClass('on'))
+        $('.chat-sidebar .chat-status ul li a').click(function(e) {
+            if($(this).attr('data-status') == 'connected')
             {
                 if(self.api.opened === false)
                 {
@@ -206,6 +201,14 @@ var ChatApp = function(api) {
             }
 
             e.preventDefault();
+        });
+
+        $('.chat-sidebar .chat-status-container').click(function() {
+            $('.chat-sidebar').removeClass('chat-status-opened');
+        });
+
+        $('.chat-sidebar .status').click(function() {
+            $('.chat-sidebar').addClass('chat-status-opened');
         });
 
         // We connect automatically, when connection was opened in last session.
@@ -375,6 +378,30 @@ var ChatApp = function(api) {
         }
     };
 
+    this.getUserIconByResult = function(result) {
+        if(result.type == 'widget')
+        {
+            return undefined;
+        }
+        else if(result.type == 'system')
+        {
+            return undefined;
+        }
+        else
+        {
+            var icon = undefined;
+
+            $('.chat-sidebar .users li').each(function() {
+                if($(this).data('id') == result.from)
+                {
+                    icon = $(this).find('.user-avatar').attr('data-avatar');
+                }
+            });
+
+            return icon;
+        }
+    };
+
     this.resolveWidgetUsername = function(result, appendToStorage) {
         var founded = false;
 
@@ -387,7 +414,7 @@ var ChatApp = function(api) {
 
         if(! founded)
         {
-            $('.chat-sidebar .users .widgets ul').append('<li data-id="' + result.from + '" data-name="' + result.name + '" class="is-widget connected"><i class="fa fa-remove btn-widget-remove"></i> <span class="conn-dot"></span> <small>(widget)</small> ' + result.name + '</li>')
+            $('.chat-sidebar .users .widgets ul').append('<li data-id="' + result.from + '" data-name="' + result.name + '" class="is-widget connected"><i class="fa fa-remove btn-widget-remove"></i><span class="user-name">' + result.name + '</span><span class="conn-dot"></span></li>')
 
             if(appendToStorage)
             {
@@ -445,7 +472,16 @@ var ChatApp = function(api) {
     this.notifyForMessage = function(result) {
         if(this.showBrowserNotifications && this.browserTabFocused === false)
         {
-            ChatBrowserNotification.notify('Nowa wiadomość', 'Masz nową wiadomość od ' +  this.findUsernameByResult(result));
+            if(result.data.length > 80)
+                var text = $.trim(result.data.substring(0, 80)) + '...';
+            else
+                var text = result.data;
+
+            APP.BrowserNotification.show({
+                title: this.findUsernameByResult(result) + ' (Chat)',
+                body:  text,
+                icon:  this.getUserIconByResult(result)
+            });
         }
 
         var focusedBox = this.boxes.getFocusedBox();
